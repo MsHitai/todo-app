@@ -3,8 +3,8 @@ package src.service;
 import src.model.Task;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class TaskOrganizer implements Organizable{
 
@@ -18,9 +18,36 @@ public class TaskOrganizer implements Organizable{
 
 
     @Override
-    public void createTask(Task task) {
-        task.setId(createId());
+    public void addTask(Task task) {
         tasks.put(task.getId(), task);
+    }
+    @Override
+    public Task createTask(Scanner scanner) {
+        Task task = new Task();
+        task.setId(createId());
+        task.setDescription(addDescription(scanner));
+        scanner.nextLine();
+        task.setDueDate(addDate(scanner));
+        return task;
+    }
+
+    private String addDescription(Scanner scanner) {
+        return scanner.nextLine();
+    }
+
+    private LocalDate addDate (Scanner scanner) { // добавить чтение информации с файла
+        System.out.print("Введите дату [дд. мм. гггг]: ");
+        String str = scanner.nextLine();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+        return LocalDate.parse(str, dtf);
+    }
+
+    public List<Task> getTasks() {
+        List<Task> tasksToReturn = new ArrayList<>();
+        for (Integer id : tasks.keySet()) {
+            tasksToReturn.add(tasks.get(id));
+        }
+        return tasksToReturn;
     }
 
     @Override

@@ -31,9 +31,12 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public Task(int id, String description, LocalDate dueDate) {
-        this.id = id;
-        this.description = description;
-        this.dueDate = dueDate;
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", dueDate=" + dueDate +
+                '}';
     }
 }
