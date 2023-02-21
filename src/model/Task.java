@@ -9,10 +9,6 @@ public class Task {
 
     private boolean isDone;
 
-    public boolean isDone() {
-        return isDone;
-    }
-
     public void setDone(boolean done) {
         isDone = done;
     }
@@ -25,16 +21,8 @@ public class Task {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
     }
 
     public void setDueDate(LocalDate dueDate) {
