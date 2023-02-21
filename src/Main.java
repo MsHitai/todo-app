@@ -1,3 +1,5 @@
+package src;
+
 import src.menu.Menu;
 import src.menu.ShowMenu;
 
