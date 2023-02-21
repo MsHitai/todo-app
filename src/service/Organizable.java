@@ -2,19 +2,17 @@ package src.service;
 
 import src.model.Task;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
 public interface Organizable {
 
     void addTask(Task task);
 
-    Task createTask(Scanner scanner);
+    Task createTask(String description, String date);
 
     List<Task> getTasks();
 
-    void assignDeadLine(int id, LocalDate dueDate);
+    void assignDeadLine(int id, String dueDate);
 
     void markAsDone(int id);
 

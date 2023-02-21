@@ -9,6 +9,18 @@ public class Task {
 
     private boolean isDone;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
     public void setDone(boolean done) {
         isDone = done;
     }

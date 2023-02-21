@@ -22,26 +22,14 @@ public class TaskOrganizer implements Organizable{
         tasks.put(task.getId(), task);
     }
     @Override
-    public Task createTask(Scanner scanner) {
+    public Task createTask(String description, String date) {
         Task task = new Task();
         task.setId(createId());
-        task.setDescription(addDescription(scanner));
-        task.setDueDate(addDate(scanner));
+        task.setDescription(description);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+        task.setDueDate(LocalDate.parse(date, dtf));
         task.setDone(false);
         return task;
-    }
-
-    private String addDescription(Scanner scanner) {
-        System.out.println("Добавьте описание: ");
-        scanner.nextLine();
-        return scanner.nextLine();
-    }
-
-    private LocalDate addDate (Scanner scanner) {
-        System.out.print("Введите дату [дд. мм. гггг]: ");
-        String str = scanner.nextLine();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
-        return LocalDate.parse(str, dtf);
     }
 
     public List<Task> getTasks() {
@@ -53,10 +41,11 @@ public class TaskOrganizer implements Organizable{
     }
 
     @Override
-    public void assignDeadLine(int id, LocalDate dueDate) {
+    public void assignDeadLine(int id, String dueDate) {
         if (tasks.containsKey(id)) {
             Task task = tasks.get(id);
-            task.setDueDate(dueDate);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+            task.setDueDate(LocalDate.parse(dueDate, dtf));
         } else {
             System.out.println("Под таким номером нет задачи.");
         }

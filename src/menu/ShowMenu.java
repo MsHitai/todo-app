@@ -3,8 +3,6 @@ package src.menu;
 import src.service.Organizable;
 import src.service.TaskOrganizer;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ShowMenu implements Menu {
@@ -28,14 +26,19 @@ public class ShowMenu implements Menu {
             int input = scanner.nextInt();
             switch (input) {
                 case 1:
-                    organizer.addTask(organizer.createTask(scanner));
+                    System.out.println("Введите описание");
+                    scanner.nextLine();
+                    String description = scanner.nextLine();
+                    System.out.println("Введите новую дату в формате: дд. мм. гггг");
+                    String date = scanner.nextLine();
+                    organizer.addTask(organizer.createTask(description, date));
                     break;
                 case 2:
                     System.out.println("Введите id задачи");
                     int id = scanner.nextInt();
                     System.out.println("Введите новое описание");
                     scanner.nextLine();
-                    String description = scanner.nextLine();
+                    description = scanner.nextLine();
                     organizer.changeTask(id, description);
                     break;
                 case 3:
@@ -43,9 +46,8 @@ public class ShowMenu implements Menu {
                     id = scanner.nextInt();
                     System.out.println("Введите новую дату в формате: дд. мм. гггг");
                     scanner.nextLine();
-                    String date = scanner.nextLine();
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
-                    organizer.assignDeadLine(id, LocalDate.parse(date, dtf));
+                    date = scanner.nextLine();
+                    organizer.assignDeadLine(id, date);
                     break;
                 case 4:
                     System.out.println("Введите id задачи");
