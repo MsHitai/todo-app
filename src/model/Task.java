@@ -7,6 +7,16 @@ public class Task {
     private String description;
     private LocalDate dueDate;
 
+    private boolean isDone;
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
     public int getId() {
         return id;
     }
@@ -37,6 +47,7 @@ public class Task {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", dueDate=" + dueDate +
+                ", isDone=" + isDone +
                 '}';
     }
 }

@@ -21,16 +21,21 @@ public class ShowMenu implements Menu {
     }
     @Override
     public void display(Scanner scanner) {
-        printMenu();
-        int input = scanner.nextInt();
-        switch (input) {
-            case 1:
-                organizer.addTask(organizer.createTask(scanner));
-                break;
-            case 5:
-                System.out.println(organizer.getTasks());
-                break;
-
+        boolean quit = false;
+        while (!quit) {
+            printMenu();
+            int input = scanner.nextInt();
+            switch (input) {
+                case 1:
+                    organizer.addTask(organizer.createTask(scanner));
+                    break;
+                case 5:
+                    System.out.println(organizer.getTasks());
+                    break;
+                case 0:
+                    quit = true;
+                    break;
+            }
         }
     }
 

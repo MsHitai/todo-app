@@ -26,16 +26,17 @@ public class TaskOrganizer implements Organizable{
         Task task = new Task();
         task.setId(createId());
         task.setDescription(addDescription(scanner));
-        scanner.nextLine();
         task.setDueDate(addDate(scanner));
+        task.setDone(false);
         return task;
     }
 
     private String addDescription(Scanner scanner) {
+        scanner.nextLine();
         return scanner.nextLine();
     }
 
-    private LocalDate addDate (Scanner scanner) { // добавить чтение информации с файла
+    private LocalDate addDate (Scanner scanner) { // todo добавить чтение информации с файла
         System.out.print("Введите дату [дд. мм. гггг]: ");
         String str = scanner.nextLine();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
