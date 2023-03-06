@@ -1,4 +1,4 @@
-package src.menu;
+package src.interfaces;
 
 import java.util.Scanner;
 

@@ -1,16 +1,17 @@
 package src.service;
 
+import src.interfaces.Organizable;
 import src.model.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class TaskOrganizer implements Organizable{
+public class TaskOrganizer implements Organizable {
 
     private int id;
 
-    private final Map<Integer, Task> tasks = new HashMap<>();
+    protected final Map<Integer, Task> tasks = new HashMap<>();
 
     private int createId() {
         return ++id;

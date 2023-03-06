@@ -1,6 +1,7 @@
 package src.menu;
 
-import src.service.Organizable;
+import src.interfaces.Menu;
+import src.interfaces.Organizable;
 import src.service.TaskOrganizer;
 
 import java.util.Scanner;
@@ -65,6 +66,7 @@ public class ShowMenu implements Menu {
                     break;
                 case 0:
                     quit = true;
+                    scanner.close();
                     break;
                 default:
                     System.out.println("Такой команды пока нет");

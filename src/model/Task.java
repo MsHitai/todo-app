@@ -6,8 +6,17 @@ public class Task {
     private int id;
     private String description;
     private LocalDate dueDate;
-
     private boolean isDone;
+
+    public Task() {
+    }
+
+    public Task(int id, String description, LocalDate dueDate, boolean isDone) {
+        this.id = id;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.isDone = isDone;
+    }
 
     public String getDescription() {
         return description;
@@ -43,11 +52,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", dueDate=" + dueDate +
-                ", isDone=" + isDone +
-                '}';
+        return id + "," + description + "," + dueDate + "," + isDone + "\n";
     }
 }
