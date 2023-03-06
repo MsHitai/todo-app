@@ -1,2 +1,2 @@
 # To-Do-List-Application
-Pet project, idea from openclassrooms.com
+Pet project, initial idea from openclassrooms.com
