@@ -1,13 +1,17 @@
 package src.menu;
 
 import src.interfaces.Menu;
-import src.interfaces.Organizable;
-import src.service.TaskOrganizer;
+import src.service.FileTaskOrganizer;
 
+import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ShowMenu implements Menu {
-    Organizable organizer = new TaskOrganizer();
+    FileTaskOrganizer organizer = FileTaskOrganizer.load("out/resources/save.csv");
+
+    public ShowMenu() throws FileNotFoundException {
+    }
 
     private void printMenu() {
         System.out.println("Что вы хотите сделать?");
@@ -19,12 +23,19 @@ public class ShowMenu implements Menu {
         System.out.println("6. Удалить задачу по id");
         System.out.println("0. Выйти из приложения");
     }
+
     @Override
     public void display(Scanner scanner) {
         boolean quit = false;
         while (!quit) {
             printMenu();
-            int input = scanner.nextInt();
+            int input = -1;
+            try {
+                input = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Введите целое число");
+                scanner.nextLine();
+            }
             switch (input) {
                 case 1:
                     System.out.println("Введите описание");
@@ -36,33 +47,53 @@ public class ShowMenu implements Menu {
                     break;
                 case 2:
                     System.out.println("Введите id задачи");
-                    int id = scanner.nextInt();
-                    System.out.println("Введите новое описание");
-                    scanner.nextLine();
-                    description = scanner.nextLine();
-                    organizer.changeTask(id, description);
+                    try {
+                        int id = scanner.nextInt();
+                        System.out.println("Введите новое описание");
+                        scanner.nextLine();
+                        description = scanner.nextLine();
+                        organizer.changeTask(id, description);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Введите целое число");
+                        scanner.nextLine();
+                    }
                     break;
                 case 3:
                     System.out.println("Введите id задачи");
-                    id = scanner.nextInt();
-                    System.out.println("Введите новую дату в формате: дд. мм. гггг");
-                    scanner.nextLine();
-                    date = scanner.nextLine();
-                    organizer.assignDeadLine(id, date);
+                    try {
+                        int id = scanner.nextInt();
+                        System.out.println("Введите новую дату в формате: дд. мм. гггг");
+                        scanner.nextLine();
+                        date = scanner.nextLine();
+                        organizer.assignDeadLine(id, date);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Введите целое число");
+                        scanner.nextLine();
+                    }
                     break;
                 case 4:
                     System.out.println("Введите id задачи");
-                    id = scanner.nextInt();
-                    organizer.markAsDone(id);
-                    System.out.println("Задача выполнена");
+                    try {
+                        int id = scanner.nextInt();
+                        organizer.markAsDone(id);
+                        System.out.println("Задача выполнена");
+                    } catch (InputMismatchException e) {
+                        System.out.println("Введите целое число");
+                        scanner.nextLine();
+                    }
                     break;
                 case 5:
                     System.out.println(organizer.getTasks());
                     break;
                 case 6:
                     System.out.println("Введите id задачи");
-                    id = scanner.nextInt();
-                    organizer.removeTask(id);
+                    try {
+                        int id = scanner.nextInt();
+                        organizer.removeTask(id);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Введите целое число");
+                        scanner.nextLine();
+                    }
                     break;
                 case 0:
                     quit = true;
@@ -71,6 +102,7 @@ public class ShowMenu implements Menu {
                 default:
                     System.out.println("Такой команды пока нет");
                     break;
+
             }
         }
     }

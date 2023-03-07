@@ -5,6 +5,7 @@ import src.model.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class TaskOrganizer implements Organizable {
@@ -25,10 +26,19 @@ public class TaskOrganizer implements Organizable {
     @Override
     public Task createTask(String description, String date) {
         Task task = new Task();
-        task.setId(createId());
+        if (tasks.isEmpty()) {
+            task.setId(createId());
+        } else {
+            id = tasks.size();
+            task.setId(createId());
+        }
         task.setDescription(description);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
-        task.setDueDate(LocalDate.parse(date, dtf));
+        try {
+            task.setDueDate(LocalDate.parse(date, dtf));
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
+        }
         task.setDone(false);
         return task;
     }
@@ -46,7 +56,11 @@ public class TaskOrganizer implements Organizable {
         if (tasks.containsKey(id)) {
             Task task = tasks.get(id);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
-            task.setDueDate(LocalDate.parse(dueDate, dtf));
+            try {
+                task.setDueDate(LocalDate.parse(dueDate, dtf));
+            } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
+            }
         } else {
             System.out.println("Под таким номером нет задачи.");
         }
