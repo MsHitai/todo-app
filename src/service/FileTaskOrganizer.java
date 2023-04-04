@@ -95,7 +95,7 @@ public class FileTaskOrganizer extends TaskOrganizer implements Organizable {
                 String line = br.readLine();
                 if (!line.contains("id,description")) {
                     Task task = taskFromString(line);
-                    fileTaskOrganizer.tasks.put(task.getId(), task);
+                    fileTaskOrganizer.addTask(task);
                 }
             }
         } catch (FileNotFoundException e) {

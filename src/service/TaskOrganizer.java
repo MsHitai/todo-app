@@ -21,17 +21,15 @@ public class TaskOrganizer implements Organizable {
 
     @Override
     public void addTask(Task task) {
+        if (task.getId() > id) {
+            id = task.getId();
+        }
         tasks.put(task.getId(), task);
     }
     @Override
     public Task createTask(String description, String date) {
         Task task = new Task();
-        if (tasks.isEmpty()) {
-            task.setId(createId());
-        } else {
-            id = tasks.size();
-            task.setId(createId());
-        }
+        task.setId(createId());
         task.setDescription(description);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
         try {

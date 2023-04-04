@@ -1,4 +1,5 @@
 id,description,dueDate,isDone
-1,make save possible with menu,2023-03-08,true
-2,make it an app with buttons,2023-03-31,false
-3,add subtasks?,2023-03-31,false
+1,добавить удаление всех задач,2023-04-05,false
+2,make it an app with buttons,2023-04-30,false
+3,make an HttpServer,2023-04-05,false
+4,fix the bug with id not increasing,2023-04-04,true
