@@ -58,6 +58,18 @@ public class FileTaskOrganizer extends TaskOrganizer implements Organizable {
         save();
     }
 
+    @Override
+    public void deleteAllTasks() {
+        super.deleteAllTasks();
+        save();
+    }
+
+    @Override
+    public void deleteAllDoneTasks() {
+        super.deleteAllDoneTasks();
+        save();
+    }
+
     private static Task taskFromString (String value) {
         String[] fields = value.split(",");
         int id = Integer.parseInt(fields[0]);

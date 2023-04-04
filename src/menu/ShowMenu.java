@@ -21,6 +21,8 @@ public class ShowMenu implements Menu {
         System.out.println("4. Пометить задачу как выполненная");
         System.out.println("5. Посмотреть список задач");
         System.out.println("6. Удалить задачу по id");
+        System.out.println("7. Удалить все задачи");
+        System.out.println("8. Удалить все выполненные задачи");
         System.out.println("0. Выйти из приложения");
     }
 
@@ -94,6 +96,14 @@ public class ShowMenu implements Menu {
                         System.out.println("Введите целое число");
                         scanner.nextLine();
                     }
+                    break;
+                case 7:
+                    organizer.deleteAllTasks();
+                    System.out.println("Успешно.");
+                    break;
+                case 8:
+                    organizer.deleteAllDoneTasks();
+                    System.out.println("Успешно.");
                     break;
                 case 0:
                     quit = true;

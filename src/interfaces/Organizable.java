@@ -20,5 +20,7 @@ public interface Organizable {
 
     void changeTask(int id, String description);
 
+    void deleteAllTasks();
 
+    void deleteAllDoneTasks();
 }

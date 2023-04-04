@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class TaskOrganizerTest {
 
     TaskOrganizer taskOrganizer = new TaskOrganizer();
@@ -21,13 +23,13 @@ class TaskOrganizerTest {
 
     @Test
     public void createTask() {
-        Assertions.assertEquals(3, taskOrganizer.getTasks().size(), "Adding 3 tasks");
+        assertEquals(3, taskOrganizer.getTasks().size(), "Adding 3 tasks");
     }
 
     @Test
     public void assignDeadLine() {
         taskOrganizer.assignDeadLine(2, "01. 03. 2023");
-        Assertions.assertEquals(LocalDate.parse("01. 03. 2023",
+        assertEquals(LocalDate.parse("01. 03. 2023",
                 DateTimeFormatter.ofPattern("dd. MM. yyyy")), taskOrganizer.getTasks().get(1).getDueDate(), "Changing date");
     }                                                           // it's an arrayList, that's why it's an index
 
@@ -40,18 +42,25 @@ class TaskOrganizerTest {
     @Test
     public void removeTask() {
         taskOrganizer.removeTask(1);
-        Assertions.assertEquals(2, taskOrganizer.getTasks().size(), "Removing 1 task");
+        assertEquals(2, taskOrganizer.getTasks().size(), "Removing 1 task");
     }
 
     @Test
     public void changeTask() {
         taskOrganizer.changeTask(2, "work");
-        Assertions.assertEquals("work", taskOrganizer.getTasks().get(1).getDescription(), "Changing description");
+        assertEquals("work", taskOrganizer.getTasks().get(1).getDescription(), "Changing description");
     }
 
     @Test
     public void addTask() {
         taskOrganizer.addTask(new Task());
-        Assertions.assertEquals(4, taskOrganizer.getTasks().size(), "Adding 1 task");
+        assertEquals(4, taskOrganizer.getTasks().size(), "Adding 1 task");
+    }
+
+    @Test
+    public void shouldDeleteAllTasks() {
+        taskOrganizer.deleteAllTasks();
+
+        assertEquals(0, taskOrganizer.getTasks().size());
     }
 }

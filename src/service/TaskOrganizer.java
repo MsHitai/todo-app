@@ -92,4 +92,26 @@ public class TaskOrganizer implements Organizable {
             System.out.println("Под таким номером нет задачи.");
         }
     }
+
+    @Override
+    public void deleteAllTasks() {
+        tasks.clear();
+    }
+
+    @Override
+    public void deleteAllDoneTasks() {
+        if (tasks.isEmpty()) {
+            return;
+        }
+        ArrayList<Task> doneTasks = new ArrayList<>();
+        for (Task task : tasks.values()) {
+            if (task.isDone()) {
+                doneTasks.add(task);
+            }
+        }
+
+        for (Task doneTask : doneTasks) {
+            tasks.remove(doneTask.getId());
+        }
+    }
 }
