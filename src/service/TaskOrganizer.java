@@ -1,7 +1,7 @@
-package src.service;
+package service;
 
-import src.interfaces.Organizable;
-import src.model.Task;
+import interfaces.Organizable;
+import model.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

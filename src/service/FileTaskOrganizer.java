@@ -1,8 +1,8 @@
-package src.service;
+package service;
 
-import src.exceptions.ManagerSaveException;
-import src.interfaces.Organizable;
-import src.model.Task;
+import exceptions.ManagerSaveException;
+import interfaces.Organizable;
+import model.Task;
 
 import java.io.*;
 import java.time.LocalDate;

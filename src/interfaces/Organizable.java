@@ -1,6 +1,6 @@
-package src.interfaces;
+package interfaces;
 
-import src.model.Task;
+import model.Task;
 
 import java.util.List;
 

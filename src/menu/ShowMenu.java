@@ -1,14 +1,14 @@
-package src.menu;
+package menu;
 
-import src.interfaces.Menu;
-import src.service.FileTaskOrganizer;
+import service.FileTaskOrganizer;
+import interfaces.Menu;
 
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ShowMenu implements Menu {
-    FileTaskOrganizer organizer = FileTaskOrganizer.load("out/resources/save.csv");
+    FileTaskOrganizer organizer = FileTaskOrganizer.load("resources/save.csv");
 
     public ShowMenu() throws FileNotFoundException {
     }
