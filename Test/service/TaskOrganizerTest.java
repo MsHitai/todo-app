@@ -63,4 +63,14 @@ class TaskOrganizerTest {
 
         assertEquals(0, taskOrganizer.getTasks().size());
     }
+
+    @Test
+    public void shouldDeleteDoneTasks() {
+        taskOrganizer.markAsDone(2);
+        taskOrganizer.markAsDone(3);
+
+        taskOrganizer.deleteAllDoneTasks();
+
+        assertEquals(1, taskOrganizer.getTasks().size());
+    }
 }
