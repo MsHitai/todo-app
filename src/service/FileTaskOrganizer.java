@@ -35,6 +35,11 @@ public class FileTaskOrganizer extends TaskOrganizer implements Organizable {
     }
 
     @Override
+    public Task getTask(int id) {
+        return super.getTask(id);
+    }
+
+    @Override
     public void assignDeadLine(int id, String dueDate) {
         super.assignDeadLine(id, dueDate);
         save();
@@ -59,6 +64,12 @@ public class FileTaskOrganizer extends TaskOrganizer implements Organizable {
     }
 
     @Override
+    public void updateTask(Task task) {
+        super.updateTask(task);
+        save();
+    }
+
+    @Override
     public void deleteAllTasks() {
         super.deleteAllTasks();
         save();
@@ -74,7 +85,7 @@ public class FileTaskOrganizer extends TaskOrganizer implements Organizable {
         String[] fields = value.split(",");
         int id = Integer.parseInt(fields[0]);
         String description = fields[1];
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate dueDate = LocalDate.parse(fields[2], dateTimeFormatter);
         boolean isDone = Boolean.parseBoolean(fields[3]);
 

@@ -12,6 +12,10 @@ public interface Organizable {
 
     List<Task> getTasks();
 
+    Task getTask(int id);
+
+    void updateTask(Task task);
+
     void assignDeadLine(int id, String dueDate);
 
     void markAsDone(int id);

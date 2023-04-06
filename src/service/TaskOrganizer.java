@@ -40,13 +40,18 @@ public class TaskOrganizer implements Organizable {
         task.setDone(false);
         return task;
     }
-
+    @Override
     public List<Task> getTasks() {
         List<Task> tasksToReturn = new ArrayList<>();
         for (Integer id : tasks.keySet()) {
             tasksToReturn.add(tasks.get(id));
         }
         return tasksToReturn;
+    }
+
+    @Override
+    public Task getTask(int id) {
+        return tasks.get(id);
     }
 
     @Override
@@ -90,6 +95,14 @@ public class TaskOrganizer implements Organizable {
             task.setDescription(description);
         } else {
             System.out.println("Под таким номером нет задачи.");
+        }
+    }
+
+    @Override
+    public void updateTask(Task task) {
+        int id = task.getId();
+        if (tasks.containsKey(id)) {
+            tasks.put(id, task);
         }
     }
 
