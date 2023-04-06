@@ -43,7 +43,7 @@ public class ShowMenu implements Menu {
                     System.out.println("Введите описание");
                     scanner.nextLine();
                     String description = scanner.nextLine();
-                    System.out.println("Введите новую дату в формате: дд. мм. гггг");
+                    System.out.println("Введите новую дату в формате: дд-мм-гггг");
                     String date = scanner.nextLine();
                     organizer.addTask(organizer.createTask(description, date));
                     break;
@@ -64,7 +64,7 @@ public class ShowMenu implements Menu {
                     System.out.println("Введите id задачи");
                     try {
                         int id = scanner.nextInt();
-                        System.out.println("Введите новую дату в формате: дд. мм. гггг");
+                        System.out.println("Введите новую дату в формате: дд-мм-гггг");
                         scanner.nextLine();
                         date = scanner.nextLine();
                         organizer.assignDeadLine(id, date);

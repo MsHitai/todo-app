@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,9 +16,9 @@ class TaskOrganizerTest {
 
     @BeforeEach
     void setUp() {
-        taskOrganizer.addTask(taskOrganizer.createTask("task1", "23. 02. 2022"));
-        taskOrganizer.addTask(taskOrganizer.createTask("task2", "24. 02. 2022"));
-        taskOrganizer.addTask(taskOrganizer.createTask("task2", "25. 02. 2022"));
+        taskOrganizer.addTask(taskOrganizer.createTask("task1", "23-02-2022"));
+        taskOrganizer.addTask(taskOrganizer.createTask("task2", "24-02-2022"));
+        taskOrganizer.addTask(taskOrganizer.createTask("task2", "25-02-2022"));
     }
 
     @Test
@@ -28,9 +28,9 @@ class TaskOrganizerTest {
 
     @Test
     public void assignDeadLine() {
-        taskOrganizer.assignDeadLine(2, "01. 03. 2023");
-        assertEquals(LocalDate.parse("01. 03. 2023",
-                DateTimeFormatter.ofPattern("dd. MM. yyyy")), taskOrganizer.getTasks().get(1).getDueDate(), "Changing date");
+        taskOrganizer.assignDeadLine(2, "01-03-2023");
+        assertEquals(LocalDate.of(2023, Month.MARCH, 1), taskOrganizer.getTasks().get(1).getDueDate(),
+                "Changing date");
     }                                                           // it's an arrayList, that's why it's an index
 
     @Test

@@ -31,7 +31,7 @@ public class TaskOrganizer implements Organizable {
         Task task = new Task();
         task.setId(createId());
         task.setDescription(description);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             task.setDueDate(LocalDate.parse(date, dtf));
         } catch (DateTimeParseException e) {
@@ -58,7 +58,7 @@ public class TaskOrganizer implements Organizable {
     public void assignDeadLine(int id, String dueDate) {
         if (tasks.containsKey(id)) {
             Task task = tasks.get(id);
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             try {
                 task.setDueDate(LocalDate.parse(dueDate, dtf));
             } catch (DateTimeParseException e) {

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,9 +21,9 @@ class FileTaskOrganizerTest {
     void setUp() {
         file = new File("resources/test_" + System.nanoTime() + ".csv");
         fileTaskOrganizer = new FileTaskOrganizer(file.toString());
-        fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task1", "23. 02. 2022"));
-        fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task2", "24. 02. 2022"));
-        fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task2", "25. 02. 2022"));
+        fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task1", "23-02-2022"));
+        fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task2", "24-02-2022"));
+        fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task3", "25-02-2022"));
     }
 
     @AfterEach
@@ -38,10 +38,9 @@ class FileTaskOrganizerTest {
 
     @Test
     public void assignDeadLine() {
-        fileTaskOrganizer.assignDeadLine(2, "01. 03. 2023");
-        Assertions.assertEquals(LocalDate.parse("01. 03. 2023",
-                DateTimeFormatter.ofPattern("dd. MM. yyyy")), fileTaskOrganizer.getTasks().get(1).getDueDate(),
-                "Changing date");
+        fileTaskOrganizer.assignDeadLine(2, "01-03-2023");
+        Assertions.assertEquals(LocalDate.of(2023, Month.MARCH, 1),
+                fileTaskOrganizer.getTasks().get(1).getDueDate(), "Changing date");
     }
 
     @Test
@@ -76,7 +75,7 @@ class FileTaskOrganizerTest {
     @Test // должен загружать из файла
     public void shouldLoadFromFile () throws FileNotFoundException {
 
-        fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task3", "23. 02. 2022"));
+        fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task4", "23-02-2022"));
 
         FileTaskOrganizer fileTaskOrganizer1 = FileTaskOrganizer.load(file.toString());
 

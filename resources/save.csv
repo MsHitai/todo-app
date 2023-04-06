@@ -1,4 +1,3 @@
 id,description,dueDate,isDone
-2,make it an app with buttons,30. 04. 2023,false
-3,make an HttpServer,07. 04. 2023,false
-4,add typeAdapter for LocalDate,07. 04. 2023,false
+2,make it an app with buttons,30-04-2023,false
+5,add Users and ApiTokens,30-04-2023,false

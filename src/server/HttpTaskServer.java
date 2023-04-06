@@ -1,16 +1,15 @@
 package server;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import interfaces.Organizable;
 import model.Task;
-import service.FileTaskOrganizer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
 import static java.net.HttpURLConnection.*;
@@ -30,7 +29,9 @@ public class HttpTaskServer {
         httpServer = HttpServer.create(new InetSocketAddress("localhost", PORT), 0);
         //httpServer.createContext("/register", this::register);
         httpServer.createContext("/tasks", this::handleTasks);
-        gson = new Gson();
+        gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .create();
     }
 
     public void start() {
@@ -75,7 +76,7 @@ public class HttpTaskServer {
             exchange.sendResponseHeaders(HTTP_BAD_REQUEST, 0);
             return;
         }
-        int id = parsePathId(pathParts[3]);
+        int id = parsePathId(pathParts[2]);
         if (id == -1) {
             System.out.println("Некорректный идентификатор");
             exchange.sendResponseHeaders(HTTP_BAD_REQUEST, 0);
@@ -99,7 +100,7 @@ public class HttpTaskServer {
             exchange.sendResponseHeaders(HTTP_OK, 0);
             return;
         }
-        int id = parsePathId(pathParts[3]);
+        int id = parsePathId(pathParts[2]);
         if (id == -1) {
             System.out.println("Некорректный идентификатор");
             exchange.sendResponseHeaders(HTTP_BAD_REQUEST, 0);
@@ -113,10 +114,9 @@ public class HttpTaskServer {
         String taskString = readText(exchange);
         Task task = gson.fromJson(taskString, Task.class);
         String description = task.getDescription();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String localDate = task.getDueDate().format(formatter);
-        taskManager.createTask(description, localDate);
-        taskManager.addTask(task);
+        taskManager.addTask(taskManager.createTask(description, localDate));
         exchange.sendResponseHeaders(HTTP_OK, 0);
     }
 
@@ -127,7 +127,7 @@ public class HttpTaskServer {
             response = gson.toJson(taskManager.getTasks());
             sendText(exchange, response);
         } else {
-            int id = parsePathId(pathParts[3]);
+            int id = parsePathId(pathParts[2]);
             if (id == -1) {
                 System.out.println("Некорректный идентификатор");
                 exchange.sendResponseHeaders(HTTP_BAD_REQUEST, 0);
@@ -159,28 +159,5 @@ public class HttpTaskServer {
 
     private String generateToken() {
         return "" + System.currentTimeMillis();
-    }
-
-    public static void main(String[] args) throws IOException {
-        Organizable taskManager = new FileTaskOrganizer("resources/test.csv");
-
-        HttpTaskServer server = new HttpTaskServer(taskManager);
-
-        Task task = new Task(0, "testTask", LocalDate.of(2023, Month.APRIL, 6), false);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MM. yyyy");
-        String date = task.getDueDate().format(dtf);
-
-        taskManager.createTask(task.getDescription(), date);
-        taskManager.addTask(task);
-
-        Task task1 = new Task(1, "testTask2", LocalDate.of(2023, Month.APRIL, 6), false);
-        String date1 = task1.getDueDate().format(dtf);
-
-        taskManager.createTask(task1.getDescription(), date1);
-        taskManager.addTask(task1);
-
-        server.start();
-
-        //server.stop();
     }
 }

@@ -11,11 +11,11 @@ import java.time.format.DateTimeFormatter;
 public class LocalDateAdapter extends TypeAdapter<LocalDate> {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private static final DateTimeFormatter FORMATTER_READ = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter FORMATTER_READ = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     @Override
     public void write(JsonWriter jsonWriter, LocalDate localDate) throws IOException {
-        jsonWriter.value(localDate.format(FORMATTER));
+        jsonWriter.value(FORMATTER.format(localDate));
     }
 
     @Override
