@@ -1,13 +1,28 @@
 package com.example.todoapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+@Entity
+@Table(name = "TASK")
 public class Task {
+    @Id
     private int id;
+    @NotNull(message = "Задача должна содержать описание")
     private String description;
+    @FutureOrPresent(message = "Дата окончания задачи должна быть в настоящем или будущем времени")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @Column(name = "due_Date")
     private LocalDate dueDate;
+    @Column(name = "isDone")
     private boolean isDone;
 
     /*private String username;
@@ -21,9 +36,11 @@ public class Task {
     }*/
 
     public Task() {
-    }
 
-    public Task(int id, String description, LocalDate dueDate, boolean isDone) {
+    }
+    @JsonCreator
+    public Task(@JsonProperty("id") int id, @JsonProperty("description") @NotNull String description,
+                @JsonProperty("dueDate") @FutureOrPresent LocalDate dueDate, @JsonProperty("isDone") boolean isDone) {
         this.id = id;
         this.description = description;
         this.dueDate = dueDate;
