@@ -2,13 +2,15 @@ package com.example.todoapplication.interfaces;
 
 import com.example.todoapplication.model.Task;
 
+import java.util.List;
+
 public interface Organizable {
 
     void addTask(Task task);
 
     Task createTask(String description, String date);
 
-    Iterable<Task> getTasks();
+    List<Task> getTasks();
 
     Task getTask(int id);
 
