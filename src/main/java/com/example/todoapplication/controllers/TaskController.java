@@ -1,7 +1,7 @@
 package com.example.todoapplication.controllers;
 
 import com.example.todoapplication.model.Task;
-import com.example.todoapplication.service.TaskService;
+import com.example.todoapplication.service.TaskOrganizer;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,11 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Slf4j
 public class TaskController {
 
-    private final TaskService taskOrganizer;
-
-    public TaskController(TaskService taskOrganizer) {
-        this.taskOrganizer = taskOrganizer;
-    }
+    private final TaskOrganizer taskOrganizer = new TaskOrganizer();
 
     @GetMapping("/tasks")
     public Iterable<Task> findAll() {
