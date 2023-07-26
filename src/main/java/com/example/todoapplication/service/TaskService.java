@@ -1,35 +1,20 @@
 package com.example.todoapplication.service;
 
 import com.example.todoapplication.model.Task;
-import com.example.todoapplication.repository.TaskRepository;
-import org.springframework.stereotype.Service;
 
-@Service
-public class TaskService {
-    private final TaskRepository taskRepository;
+import java.util.List;
 
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
+public interface TaskService {
 
-    public void addTask(Task task) {
-        taskRepository.save(task);
-    }
 
-    public Iterable<Task> getTasks() {
-        return taskRepository.findAll();
-    }
+    List<Task> getTasks();
 
-    public Task getTask(int id) {
-        return taskRepository.findById(id).orElse(null);
-    }
+    Task addTask(Task task);
 
-    public void removeTask(int id) {
-        taskRepository.deleteById(id);
-    }
+    Task findById(int id);
 
-    public void updateTask(Task task) {
-        taskRepository.deleteById(task.getId());
-        taskRepository.save(task);
-    }
+    Task updateTask(Task task);
+
+    void removeTask(int id);
+
 }

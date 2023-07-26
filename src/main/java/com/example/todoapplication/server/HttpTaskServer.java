@@ -1,11 +1,11 @@
 package com.example.todoapplication.server;
 
+import com.example.todoapplication.interfaces.Organizable;
+import com.example.todoapplication.model.Task;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
-import com.example.todoapplication.interfaces.Organizable;
-import com.example.todoapplication.model.Task;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

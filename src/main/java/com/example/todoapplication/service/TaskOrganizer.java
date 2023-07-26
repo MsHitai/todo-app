@@ -6,7 +6,10 @@ import com.example.todoapplication.model.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TaskOrganizer implements Organizable {
 
@@ -26,6 +29,7 @@ public class TaskOrganizer implements Organizable {
         }
         tasks.put(task.getId(), task);
     }
+
     @Override
     public Task createTask(String description, String date) {
         Task task = new Task();
@@ -40,6 +44,7 @@ public class TaskOrganizer implements Organizable {
         task.setDone(false);
         return task;
     }
+
     @Override
     public List<Task> getTasks() {
         List<Task> tasksToReturn = new ArrayList<>();

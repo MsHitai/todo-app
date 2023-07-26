@@ -68,12 +68,12 @@ class FileTaskOrganizerTest {
     }
 
     @Test // должен выбрасывать исключение при загрузке из неправ файла
-    public void shouldThrowExceptionWithWrongPath () {
+    public void shouldThrowExceptionWithWrongPath() {
         assertThrows(FileNotFoundException.class, () -> FileTaskOrganizer.load("resources/wrongFile.csv"));
     }
 
     @Test // должен загружать из файла
-    public void shouldLoadFromFile () throws FileNotFoundException {
+    public void shouldLoadFromFile() throws FileNotFoundException {
 
         fileTaskOrganizer.addTask(fileTaskOrganizer.createTask("task4", "23-02-2022"));
 

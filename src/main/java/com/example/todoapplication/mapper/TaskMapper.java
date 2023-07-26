@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TaskMapper {
 
-    public TaskDto mapToTaskDto (Task task) {
+    public TaskDto mapToTaskDto(Task task) {
         return TaskDto.builder()
                 .id(task.getId())
                 .description(task.getDescription())
@@ -16,7 +16,7 @@ public class TaskMapper {
                 .build();
     }
 
-    public Task mapToTask (TaskDto taskDto) {
+    public Task mapToTask(TaskDto taskDto) {
         return Task.builder()
                 .id(taskDto.getId())
                 .description(taskDto.getDescription())

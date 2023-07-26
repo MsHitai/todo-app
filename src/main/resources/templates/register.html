@@ -7,36 +7,39 @@
 </head>
 <section layout:fragment="body">
     <style>
+        .main {
+            padding: 0px 10px;
+        }
+
+        @media screen and (max-width: 450px) {
+            .login-form {
+                margin-top: 10%;
+            }
+
+            .register-form {
+                margin-top: 10%;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
             .main {
-                padding: 0px 10px;
+                margin-left: 30%;
             }
 
-            @media screen and (max-width: 450px) {
-                .login-form{
-                    margin-top: 10%;
-                }
-                .register-form{
-                    margin-top: 10%;
-                }
+            .sidenav {
+                width: 40%;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
             }
-            @media screen and (min-width: 768px){
-                .main{
-                    margin-left: 30%;
-                }
-
-                .sidenav{
-                    width: 40%;
-                    position: fixed;
-                    z-index: 1;
-                    top: 0;
-                    left: 0;
-                }
-            }
-        </style>
+        }
+    </style>
     <div class="main">
         <div class="col-md-6 col-sm-12">
             <div th:if="${param.fail}" class="alert alert-success">
-                Username or email already exists</div>
+                Username or email already exists
+            </div>
             <div class="login-form">
                 <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
                     <div class="form-group">

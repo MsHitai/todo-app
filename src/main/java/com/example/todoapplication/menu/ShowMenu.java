@@ -1,7 +1,7 @@
 package com.example.todoapplication.menu;
 
-import com.example.todoapplication.service.FileTaskOrganizer;
 import com.example.todoapplication.interfaces.Menu;
+import com.example.todoapplication.service.FileTaskOrganizer;
 
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;

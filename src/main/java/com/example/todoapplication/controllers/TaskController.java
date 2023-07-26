@@ -1,48 +1,58 @@
 package com.example.todoapplication.controllers;
 
-import com.example.todoapplication.interfaces.Organizable;
 import com.example.todoapplication.model.Task;
-import com.example.todoapplication.service.TaskOrganizer;
+import com.example.todoapplication.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @Slf4j
 public class TaskController {
 
-    private final Organizable taskOrganizer = new TaskOrganizer();
+    private final TaskService taskService;
+
+    @Autowired
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping("/tasks")
-    public Iterable<Task> findAll() {
-        return taskOrganizer.getTasks();
+    public List<Task> findAll() {
+        return taskService.getTasks();
+    }
+
+    @GetMapping("/tasks/{id}")
+    public Task findById(@PathVariable(required = false) int id) {
+        return taskService.findById(id);
     }
 
     @PostMapping("/task")
     public Task addTask(@Valid @RequestBody Task task) {
         log.debug("Получен запрос POST на создание задачи " + task.toString());
-        taskOrganizer.addTask(task);
-        return task;
+        return taskService.addTask(task);
     }
 
     @PutMapping("/task/{id}")
-    public Task updateTask(@PathVariable int id, @Valid @RequestBody Task task){
+    public Task updateTask(@PathVariable int id, @Valid @RequestBody Task task) {
         log.debug("Получен запрос PUT на обновление задачи " + task.toString());
-        if(taskOrganizer.getTask(id) == null) {
+        if (taskService.findById(id) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        taskOrganizer.updateTask(task);
-        return task;
+        return taskService.updateTask(task);
     }
 
     @DeleteMapping("/task/{id}")
-    public void deleteTask(@PathVariable int id){
-        log.debug("Получен запрос DELETE на удаление задачи " + taskOrganizer.getTask(id));
-        if(taskOrganizer.getTask(id) == null) {
+    public void deleteTask(@PathVariable int id) {
+        log.debug("Получен запрос DELETE на удаление задачи " + taskService.findById(id));
+        if (taskService.findById(id) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        taskOrganizer.removeTask(id);
+        taskService.removeTask(id);
     }
 }

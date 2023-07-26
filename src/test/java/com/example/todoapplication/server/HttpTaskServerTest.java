@@ -1,11 +1,14 @@
 package com.example.todoapplication.server;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.example.todoapplication.interfaces.Organizable;
 import com.example.todoapplication.model.Task;
-import org.junit.jupiter.api.*;
 import com.example.todoapplication.service.FileTaskOrganizer;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URI;
@@ -139,6 +142,7 @@ class HttpTaskServerTest {
 
         assertEquals(0, taskManager.getTasks().size());
     }
+
     @DisplayName("задача не удалится с неверным идентификатором")
     @Test
     void shouldNotDeleteTaskWithWrongId() throws IOException, InterruptedException {
@@ -154,6 +158,7 @@ class HttpTaskServerTest {
 
         assertEquals(1, taskManager.getTasks().size());
     }
+
     @DisplayName("должны получить ошибку, если указать букву вместо цифры ид для удаления")
     @Test
     void shouldGetErrorWhenDeleteNotNumberId() throws IOException, InterruptedException {
@@ -169,6 +174,7 @@ class HttpTaskServerTest {
 
         assertEquals(1, taskManager.getTasks().size());
     }
+
     @DisplayName("должны получить ошибку, если указать неправильный номер ид для конкретной задачи")
     @Test
     void shouldGetErrorIfUpdateWithWrongNumberId() throws IOException, InterruptedException {

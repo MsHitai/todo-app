@@ -81,7 +81,7 @@ public class FileTaskOrganizer extends TaskOrganizer implements Organizable {
         save();
     }
 
-    private static Task taskFromString (String value) {
+    private static Task taskFromString(String value) {
         String[] fields = value.split(",");
         int id = Integer.parseInt(fields[0]);
         String description = fields[1];
@@ -111,7 +111,7 @@ public class FileTaskOrganizer extends TaskOrganizer implements Organizable {
         }
     }
 
-    public static FileTaskOrganizer load (String path) throws FileNotFoundException {
+    public static FileTaskOrganizer load(String path) throws FileNotFoundException {
         final FileTaskOrganizer fileTaskOrganizer = new FileTaskOrganizer(path);
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             while (br.ready()) {
