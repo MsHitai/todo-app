@@ -15,4 +15,4 @@ Pet project, initial idea from openclassrooms.com
 
 *Добавлен User
 
-*Начато подключение Spring Security
+*Подключен Spring Security
