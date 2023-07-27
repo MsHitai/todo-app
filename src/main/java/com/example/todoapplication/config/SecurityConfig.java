@@ -16,16 +16,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
     private final UserDetailsServiceImpl userService;
+    private final JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    public SecurityConfig(UserDetailsServiceImpl userService) {
+    public SecurityConfig(UserDetailsServiceImpl userService, JwtRequestFilter jwtRequestFilter) {
         this.userService = userService;
+        this.jwtRequestFilter = jwtRequestFilter;
     }
 
     @Bean
@@ -43,12 +46,13 @@ public class SecurityConfig {
                                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                                 .and()
                                 .exceptionHandling()
-                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                                .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 });
-        //.and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 

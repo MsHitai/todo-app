@@ -1,6 +1,9 @@
 package com.example.todoapplication.service.impl;
 
 import com.example.todoapplication.dto.RegistrationDto;
+import com.example.todoapplication.dto.UserDto;
+import com.example.todoapplication.exceptions.DataNotFoundException;
+import com.example.todoapplication.mapper.UserMapper;
 import com.example.todoapplication.model.User;
 import com.example.todoapplication.repository.RoleRepository;
 import com.example.todoapplication.repository.UserRepository;
@@ -45,6 +48,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         .map(role -> new SimpleGrantedAuthority(role.getName()))
                         .collect(Collectors.toList())
         );
+    }
+
+    public UserDto findById(long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new DataNotFoundException("Пользователя с id " + userId + " нет в базе данных"));
+        return UserMapper.mapToUserDto(user);
     }
 
     public Optional<User> findByUsername(String username) {
