@@ -1,5 +1,6 @@
 package com.example.todoapplication.config;
 
+import com.example.todoapplication.exceptions.AppError;
 import com.example.todoapplication.utils.JwtTokenUtils;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
@@ -20,7 +21,6 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtTokenUtils jwtTokenUtils;
 
@@ -35,9 +35,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             try {
                 username = jwtTokenUtils.getUsername(jwt);
             } catch (ExpiredJwtException e) {
-                log.debug("Время жизни токена вышло");
+                throw new AppError("Время жизни токена вышло");
             } catch (SignatureException e) {
-                log.debug("Подпись неправильная");
+                throw new AppError("Подпись неправильная");
             }
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

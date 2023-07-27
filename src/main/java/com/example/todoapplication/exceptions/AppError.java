@@ -1,18 +1,8 @@
 package com.example.todoapplication.exceptions;
 
-import lombok.Data;
+public class AppError extends RuntimeException {
 
-import java.util.Date;
-
-@Data
-public class AppError {
-    private int status;
-    private String message;
-    private Date timestamp;
-
-    public AppError(int status, String message) {
-        this.status = status;
-        this.message = message;
-        this.timestamp = new Date();
+    public AppError(String message) {
+        super(message);
     }
 }

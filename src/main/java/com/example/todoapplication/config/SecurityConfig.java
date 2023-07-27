@@ -1,6 +1,6 @@
 package com.example.todoapplication.config;
 
-import com.example.todoapplication.service.impl.UserDetailsServiceImpl;
+import com.example.todoapplication.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +22,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final UserDetailsServiceImpl userService;
+    private final UserServiceImpl userService;
     private final JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    public SecurityConfig(UserDetailsServiceImpl userService, JwtRequestFilter jwtRequestFilter) {
+    public SecurityConfig(UserServiceImpl userService, JwtRequestFilter jwtRequestFilter) {
         this.userService = userService;
         this.jwtRequestFilter = jwtRequestFilter;
     }

@@ -1,7 +1,7 @@
 package com.example.todoapplication.controllers;
 
 import com.example.todoapplication.dto.UserDto;
-import com.example.todoapplication.service.impl.UserDetailsServiceImpl;
+import com.example.todoapplication.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserController {
 
-    private final UserDetailsServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserDetailsServiceImpl userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
